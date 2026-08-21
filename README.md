@@ -34,8 +34,9 @@ The repository holds two independent projects:
 
 ## What it does
 
-**Recipe discovery** — Search recipes by name, filter by category, cuisine or
-main ingredient, and browse a randomised selection on first load. Results from
+**Recipe discovery** — Search recipes by name, filter by category, cuisine and
+main ingredient — all at once, combined as an AND — and browse a randomised
+selection on first load. Results from
 the public API and recipes you wrote yourself appear in the same grid, with a
 toggle to narrow to either.
 
@@ -434,10 +435,13 @@ each.
 
 ## Known limitations
 
-- **Filters do not combine.** TheMealDB filters on one dimension at a time —
-  a request can be by category *or* by cuisine *or* by ingredient, not by two at
-  once. The most specific active filter wins; the UI clears the others so the
-  displayed state stays honest.
+- **Combined filters cost extra requests.** TheMealDB has no combined-filter
+  endpoint — `filter.php` handles one of category, cuisine or ingredient per
+  request. The app works around this by requesting each active filter in
+  parallel and intersecting the returned id sets, so filters do genuinely
+  combine, at the cost of one request per active filter (two or three, not one
+  per result). A text query takes a different path, since `search.php` returns
+  complete recipes that can be filtered directly.
 - **Filter results are sparse.** The `filter.php` endpoints return only an id,
   name and thumbnail, so cards from a category or cuisine filter show no
   category chip until the recipe is opened. This is preserved in the types

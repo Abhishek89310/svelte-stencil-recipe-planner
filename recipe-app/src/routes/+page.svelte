@@ -111,29 +111,73 @@
 		return run('Fresh picks for you', (signal) => getRandomRecipes(12, signal));
 	}
 
+	/** A readable description of whatever combination is currently active. */
+	function describeFilters(): string {
+		const q = query.trim();
+		const ing = ingredient.trim();
+
+		const parts: string[] = [];
+		if (category) parts.push(category);
+		if (area) parts.push(area);
+		if (ing) parts.push(`with ${ing}`);
+
+		if (parts.length === 0 && !q) return 'Fresh picks for you';
+
+		const base = parts.length > 0 ? `${parts.join(' · ')} recipes` : 'Recipes';
+		return q ? `${base} matching “${q}”` : base;
+	}
+
+	/** Keeps only the entries whose id appears in every set — a set intersection. */
+	function intersectById(sets: RecipeSummary[][]): RecipeSummary[] {
+		const [first, ...rest] = sets;
+		if (!first) return [];
+
+		const otherIds = rest.map((set) => new Set(set.map((entry) => entry.id)));
+		return first.filter((entry) => otherIds.every((ids) => ids.has(entry.id)));
+	}
+
+	function matchesIngredient(recipe: Recipe, needle: string): boolean {
+		const lower = needle.toLowerCase();
+		return recipe.ingredients.some((item) => item.name.toLowerCase().includes(lower));
+	}
+
 	/**
-	 * Resolves the active filters into a single request.
+	 * Resolves every active filter into a single result set.
 	 *
-	 * TheMealDB cannot combine filters server-side, so the most specific one
-	 * wins and the rest are applied client-side afterwards. That is a limitation
-	 * of the API rather than a design choice; it is called out in the README.
+	 * TheMealDB has no combined-filter endpoint - `filter.php` handles exactly one
+	 * of category, cuisine or ingredient per request. Rather than letting one
+	 * filter cancel the others, each active filter is requested in parallel and
+	 * the id sets are intersected. That produces a true AND in two or three
+	 * requests, instead of one request per candidate recipe.
+	 *
+	 * A text query takes a different path: `search.php` returns complete recipes,
+	 * so the remaining filters are applied to those directly.
 	 */
 	function applyFilters() {
-		if (query.trim()) {
-			return run(`Results for "${query.trim()}"`, (signal) => searchRecipes(query, signal));
+		const q = query.trim();
+		const ing = ingredient.trim();
+		const label = describeFilters();
+
+		if (q) {
+			return run(label, async (signal) => {
+				let list = await searchRecipes(q, signal);
+				if (category) list = list.filter((recipe) => recipe.category === category);
+				if (area) list = list.filter((recipe) => recipe.area === area);
+				if (ing) list = list.filter((recipe) => matchesIngredient(recipe, ing));
+				return list;
+			});
 		}
-		if (ingredient.trim()) {
-			return run(`Recipes with ${ingredient.trim()}`, (signal) =>
-				filterByIngredient(ingredient.trim(), signal)
-			);
-		}
-		if (category) {
-			return run(`${category} recipes`, (signal) => filterByCategory(category, signal));
-		}
-		if (area) {
-			return run(`${area} recipes`, (signal) => filterByArea(area, signal));
-		}
-		return loadInitial();
+
+		if (!category && !area && !ing) return loadInitial();
+
+		return run(label, async (signal) => {
+			const requests: Promise<RecipeSummary[]>[] = [];
+			if (category) requests.push(filterByCategory(category, signal));
+			if (area) requests.push(filterByArea(area, signal));
+			if (ing) requests.push(filterByIngredient(ing, signal));
+
+			return intersectById(await Promise.all(requests));
+		});
 	}
 
 	/** `searchInput` from <recipe-search-bar>: already debounced by the component. */
@@ -166,14 +210,11 @@
 
 	function onCategoryChange(value: string) {
 		category = value;
-		// The API filters on one dimension at a time, so keep the state honest.
-		if (value) area = '';
 		void applyFilters();
 	}
 
 	function onAreaChange(value: string) {
 		area = value;
-		if (value) category = '';
 		void applyFilters();
 	}
 
