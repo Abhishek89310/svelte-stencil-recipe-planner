@@ -448,9 +448,10 @@ each.
 
 ## Links
 
+- **GitHub repository:**
+  <https://github.com/Abhishek89310/svelte-stencil-recipe-planner>
 - **npm package:** _to be added after the first publish_ —
   `https://www.npmjs.com/package/@abhishek/recipe-ui`
-- **GitHub repository:** _to be added_
 - **Deployed application:** _to be added_
 - **Recipe data:** [TheMealDB](https://www.themealdb.com/api.php)
 
