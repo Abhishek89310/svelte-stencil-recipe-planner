@@ -3,7 +3,7 @@
 	import type { PageData } from './$types';
 	import type { Day, Meal } from '$lib/types';
 	import { DAYS, MEALS } from '$lib/types';
-	import type { IngredientCheckDetail, RatingChangeDetail } from '@abhishek/recipe-ui';
+	import type { IngredientCheckDetail, RatingChangeDetail } from '@iosdev_89/recipe-ui';
 	import { favorites } from '$lib/state/favorites.svelte';
 	import { myRecipes } from '$lib/state/my-recipes.svelte';
 	import { mealPlan } from '$lib/state/meal-plan.svelte';

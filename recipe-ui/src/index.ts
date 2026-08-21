@@ -1,5 +1,5 @@
 /**
- * Public entry point of @abhishek/recipe-ui.
+ * Public entry point of @iosdev_89/recipe-ui.
  *
  * Importing the package for its side effects registers every custom element;
  * the named exports below are the TypeScript payload types carried by each

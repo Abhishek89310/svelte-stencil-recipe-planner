@@ -7,7 +7,7 @@ import type {
 	RatingChangeDetail,
 	RecipeSelectDetail,
 	SearchDetail
-} from '@abhishek/recipe-ui';
+} from '@iosdev_89/recipe-ui';
 
 declare global {
 	namespace App {
@@ -19,7 +19,7 @@ declare global {
 	}
 
 	/**
-	 * Types for the custom elements from the `@abhishek/recipe-ui` npm package.
+	 * Types for the custom elements from the `@iosdev_89/recipe-ui` npm package.
 	 *
 	 * Svelte cannot infer an API for an element it did not compile, so without
 	 * these declarations every prop and every `on*` handler on a Stencil tag is

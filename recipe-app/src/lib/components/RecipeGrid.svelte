@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Recipe, RecipeSummary } from '$lib/types';
-	import type { FavoriteToggleDetail, RecipeSelectDetail } from '@abhishek/recipe-ui';
+	import type { FavoriteToggleDetail, RecipeSelectDetail } from '@iosdev_89/recipe-ui';
 	import { goto } from '$app/navigation';
 	import { favorites } from '$lib/state/favorites.svelte';
 	import { toasts } from '$lib/state/toasts.svelte';

@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import type { Day, Meal, Recipe, RecipeSummary } from '$lib/types';
 	import { DAYS, MEALS } from '$lib/types';
-	import type { MealDropDetail, MealSlotDetail } from '@abhishek/recipe-ui';
+	import type { MealDropDetail, MealSlotDetail } from '@iosdev_89/recipe-ui';
 	import { mealPlan } from '$lib/state/meal-plan.svelte';
 	import { favorites } from '$lib/state/favorites.svelte';
 	import { myRecipes } from '$lib/state/my-recipes.svelte';

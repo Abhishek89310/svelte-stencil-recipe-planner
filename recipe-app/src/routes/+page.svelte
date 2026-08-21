@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import type { SearchDetail } from '@abhishek/recipe-ui';
+	import type { SearchDetail } from '@iosdev_89/recipe-ui';
 	import type { Recipe, RecipeSummary } from '$lib/types';
 	import {
 		filterByArea,

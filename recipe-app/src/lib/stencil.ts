@@ -1,7 +1,7 @@
 import { browser } from '$app/environment';
 
 /**
- * Registers the components from the published `@abhishek/recipe-ui` npm package.
+ * Registers the components from the published `@iosdev_89/recipe-ui` npm package.
  *
  * Two details matter here:
  *
@@ -18,7 +18,7 @@ export function registerRecipeUi(): Promise<void> {
 	if (!browser) return Promise.resolve();
 
 	registration ??= (async () => {
-		const { defineCustomElements } = await import('@abhishek/recipe-ui/loader');
+		const { defineCustomElements } = await import('@iosdev_89/recipe-ui/loader');
 		await defineCustomElements(window);
 	})();
 

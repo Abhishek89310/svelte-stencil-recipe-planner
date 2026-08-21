@@ -1,4 +1,4 @@
-# @abhishek/recipe-ui
+# @iosdev_89/recipe-ui
 
 A framework-agnostic web component library for recipe discovery and meal planning
 interfaces, built with [StencilJS](https://stenciljs.com/).
@@ -13,7 +13,7 @@ application that lives alongside it in this repository.
 ## Installation
 
 ```bash
-npm install @abhishek/recipe-ui
+npm install @iosdev_89/recipe-ui
 ```
 
 ## Usage
@@ -25,8 +25,8 @@ that means inside `onMount` (or any browser-only module), because custom element
 registration needs a real DOM:
 
 ```js
-import { defineCustomElements } from '@abhishek/recipe-ui/loader';
-import '@abhishek/recipe-ui/dist/recipe-ui/recipe-ui.css'; // design tokens
+import { defineCustomElements } from '@iosdev_89/recipe-ui/loader';
+import '@iosdev_89/recipe-ui/dist/recipe-ui/recipe-ui.css'; // design tokens
 
 defineCustomElements();
 ```
@@ -111,7 +111,7 @@ any ancestor element.
 TypeScript payload types are exported from the package root:
 
 ```ts
-import type { FavoriteToggleDetail, MealDropDetail } from '@abhishek/recipe-ui';
+import type { FavoriteToggleDetail, MealDropDetail } from '@iosdev_89/recipe-ui';
 ```
 
 ---

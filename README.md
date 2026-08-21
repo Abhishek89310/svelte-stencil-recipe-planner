@@ -76,11 +76,12 @@ npm run dev
 
 Open <http://localhost:5173>.
 
-> **On the library dependency.** `recipe-app/package.json` currently points at
-> `file:../recipe-ui` so the two projects can be developed together without a
-> publish cycle. After publishing, switch it to the registry version — see
-> [Publishing to npm](#publishing-to-npm). Nothing else changes: the import
-> specifier `@abhishek/recipe-ui` is identical either way.
+> **On the library dependency.** `recipe-app` installs
+> `@iosdev_89/recipe-ui` from the npm registry, not from the local folder — so
+> `npm install` in `recipe-app/` alone is enough to run the application. Step 1
+> above is only needed if you intend to modify the library; to develop the two
+> together, point the app back at the local build with
+> `npm install file:../recipe-ui`.
 
 ---
 
@@ -319,16 +320,18 @@ Standard [semantic versioning](https://semver.org/):
 
 ### Switching the app to the published package
 
-Once the package is live on the registry, point the application at it instead of
-the local folder:
+This is already done: `recipe-app/package.json` depends on
+`"@iosdev_89/recipe-ui": "^0.1.0"`, resolved from the registry. To repeat it
+after a future publish:
 
 ```bash
 cd recipe-app
-npm install @abhishek/recipe-ui@^0.1.0
+npm install @iosdev_89/recipe-ui@latest
 ```
 
-This replaces the `"file:../recipe-ui"` entry in `package.json` with a version
-range. No source file changes — every import already uses the package name.
+No source file changes are needed — every import already uses the package name,
+so the same specifier works whether it resolves to the registry or a local
+folder.
 
 ---
 
@@ -450,8 +453,8 @@ each.
 
 - **GitHub repository:**
   <https://github.com/Abhishek89310/svelte-stencil-recipe-planner>
-- **npm package:** _to be added after the first publish_ —
-  `https://www.npmjs.com/package/@abhishek/recipe-ui`
+- **npm package:**
+  <https://www.npmjs.com/package/@iosdev_89/recipe-ui>
 - **Deployed application:** _to be added_
 - **Recipe data:** [TheMealDB](https://www.themealdb.com/api.php)
 
