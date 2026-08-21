@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 </script>
 
@@ -12,7 +13,7 @@
 	<p class="muted">{page.error?.message ?? 'An unexpected error occurred.'}</p>
 
 	<div class="actions">
-		<a class="btn btn-primary" href="/">Back to discover</a>
+		<a class="btn btn-primary" href={resolve('/')}>Back to discover</a>
 		<button class="btn" type="button" onclick={() => history.back()}>Go back</button>
 	</div>
 </div>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import type { RecipeDraft } from '$lib/state/my-recipes.svelte';
 	import { myRecipes } from '$lib/state/my-recipes.svelte';
@@ -46,12 +47,12 @@
 		const updated = myRecipes.update(recipeId, draft);
 		if (!updated) {
 			toasts.error('That recipe no longer exists.');
-			void goto('/my-recipes');
+			void goto(resolve('/my-recipes'));
 			return;
 		}
 
 		toasts.success(`Updated "${updated.name}".`);
-		void goto(`/recipes/${updated.id}`);
+		void goto(resolve('/recipes/[id]', { id: updated.id }));
 	}
 </script>
 
@@ -66,13 +67,13 @@
 			title="Recipe not found"
 			description="Only recipes you created in this browser can be edited."
 		>
-			<a class="btn btn-primary" href="/my-recipes">Back to my recipes</a>
+			<a class="btn btn-primary" href={resolve('/my-recipes')}>Back to my recipes</a>
 		</EmptyState>
 	{:else}
 		<nav class="breadcrumb" aria-label="Breadcrumb">
-			<a href="/my-recipes">My recipes</a>
+			<a href={resolve('/my-recipes')}>My recipes</a>
 			<span aria-hidden="true">/</span>
-			<a href="/recipes/{recipe.id}">{recipe.name}</a>
+			<a href={resolve('/recipes/[id]', { id: recipe.id })}>{recipe.name}</a>
 			<span aria-hidden="true">/</span>
 			<span class="muted">Edit</span>
 		</nav>
@@ -92,7 +93,7 @@
 			{categories}
 			{areas}
 			onsave={save}
-			oncancel={() => goto(`/recipes/${recipe.id}`)}
+			oncancel={() => goto(resolve('/recipes/[id]', { id: recipe.id }))}
 		/>
 	{/if}
 </div>

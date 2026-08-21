@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import type { PageData } from './$types';
 	import type { Day, Meal } from '$lib/types';
 	import { DAYS, MEALS } from '$lib/types';
@@ -92,7 +93,7 @@
 			existing
 				? `Replaced ${planMeal.toLowerCase()} on ${planDay} with "${recipe.name}".`
 				: `Added "${recipe.name}" to ${planDay} ${planMeal.toLowerCase()}.`,
-			{ label: 'View plan', run: () => goto('/planner') }
+			{ label: 'View plan', run: () => goto(resolve('/planner')) }
 		);
 	}
 
@@ -106,7 +107,7 @@
 		myRecipes.remove(recipe.id);
 
 		deleteOpen = false;
-		void goto('/my-recipes');
+		void goto(resolve('/my-recipes'));
 
 		toasts.success(
 			removedFromPlan > 0
@@ -141,7 +142,7 @@
 			title="Recipe not found"
 			description="It may have been deleted from this browser."
 		>
-			<a class="btn btn-primary" href="/">Back to discover</a>
+			<a class="btn btn-primary" href={resolve('/')}>Back to discover</a>
 		</EmptyState>
 	</div>
 {:else}
@@ -213,7 +214,7 @@
 					</button>
 
 					{#if isMine}
-						<a class="btn" href="/my-recipes/{recipe.id}/edit">Edit</a>
+						<a class="btn" href={resolve('/my-recipes/[id]/edit', { id: recipe.id })}>Edit</a>
 						<button class="btn btn-danger" type="button" onclick={() => (deleteOpen = true)}>
 							Delete
 						</button>
@@ -223,7 +224,7 @@
 				{#if scheduledIn.length > 0}
 					<p class="scheduled muted">
 						Already planned for {scheduledIn.join(', ')}.
-						<a href="/planner">Open planner</a>
+						<a href={resolve('/planner')}>Open planner</a>
 					</p>
 				{/if}
 			</header>

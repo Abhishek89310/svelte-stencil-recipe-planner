@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import type { Day, Meal, Recipe, RecipeSummary } from '$lib/types';
 	import { DAYS, MEALS } from '$lib/types';
 	import type { MealDropDetail, MealSlotDetail } from '@iosdev_89/recipe-ui';
@@ -85,7 +86,7 @@
 
 	/** `mealOpen` from <meal-slot>: a filled cell was activated. */
 	function handleOpen(event: CustomEvent<MealSlotDetail>) {
-		if (event.detail.recipeId) void goto(`/recipes/${event.detail.recipeId}`);
+		if (event.detail.recipeId) void goto(resolve('/recipes/[id]', { id: event.detail.recipeId }));
 	}
 
 	/** `mealRemove` from <meal-slot>, with undo. */
@@ -262,8 +263,8 @@
 			title="Nothing planned yet"
 			description="Save a few favourites or write your own recipes, then assign them to the week."
 		>
-			<a class="btn btn-primary" href="/">Find recipes</a>
-			<a class="btn" href="/my-recipes/new">Write a recipe</a>
+			<a class="btn btn-primary" href={resolve('/')}>Find recipes</a>
+			<a class="btn" href={resolve('/my-recipes/new')}>Write a recipe</a>
 		</EmptyState>
 	{/if}
 </div>

@@ -350,20 +350,33 @@ npm run preview                   # serve that build locally
 
 ## Deployment
 
-The application builds to static files with `@sveltejs/adapter-static`, so it
-can be served by any static host or plain file server. To check the production
-build locally:
+The application is deployed to **GitHub Pages** at:
+
+> <https://abhishek89310.github.io/svelte-stencil-recipe-planner/>
+
+Deployment is automatic: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+builds and publishes on every push to `main`, and can also be triggered by hand
+from the Actions tab. It authenticates through the repository's own OIDC
+identity, so no access token is stored anywhere.
+
+Three details make a SvelteKit SPA work on Pages, and they are worth knowing if
+you deploy it elsewhere:
+
+| Concern | Handling |
+| --- | --- |
+| A project site is served from `/<repo>/`, not the root | The workflow sets `BASE_PATH`, which feeds `kit.paths.base`. Every internal link uses `resolve()` from `$app/paths`, so nothing is hard-coded to the root. |
+| Deep links such as `/recipes/52771` are not files on disk | Pages serves `404.html` for unknown paths, so the build copies `index.html` to `404.html`. The SPA boots and routes from the URL. |
+| Pages runs Jekyll, which ignores `_`-prefixed directories | `static/.nojekyll` disables it, so `_app/` is served. |
+
+To check the production build locally:
 
 ```bash
 cd recipe-app
-npm run build
+npm run build            # serves from the root
 npm run preview
-```
 
-Because it is a single-page application, a host must be configured to serve
-`index.html` for unknown paths so that deep links such as `/recipes/52771`
-resolve. Most static hosts do this automatically for SPA builds; where it is
-configurable, the setting is usually called a *fallback* or *rewrite* rule.
+BASE_PATH=/svelte-stencil-recipe-planner npm run build   # exactly what Pages gets
+```
 
 ---
 
@@ -459,7 +472,8 @@ each.
   <https://github.com/Abhishek89310/svelte-stencil-recipe-planner>
 - **npm package:**
   <https://www.npmjs.com/package/@iosdev_89/recipe-ui>
-- **Deployed application:** _to be added_
+- **Deployed application:**
+  <https://abhishek89310.github.io/svelte-stencil-recipe-planner/>
 - **Recipe data:** [TheMealDB](https://www.themealdb.com/api.php)
 
 ---

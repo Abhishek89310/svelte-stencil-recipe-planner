@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import type { RecipeDraft } from '$lib/state/my-recipes.svelte';
 	import { myRecipes } from '$lib/state/my-recipes.svelte';
 	import { toasts } from '$lib/state/toasts.svelte';
@@ -23,7 +24,7 @@
 	function save(draft: RecipeDraft) {
 		const recipe = myRecipes.create(draft);
 		toasts.success(`Saved "${recipe.name}".`);
-		void goto(`/recipes/${recipe.id}`);
+		void goto(resolve('/recipes/[id]', { id: recipe.id }));
 	}
 </script>
 
@@ -33,7 +34,7 @@
 
 <div class="page stack">
 	<nav class="breadcrumb" aria-label="Breadcrumb">
-		<a href="/my-recipes">My recipes</a>
+		<a href={resolve('/my-recipes')}>My recipes</a>
 		<span aria-hidden="true">/</span>
 		<span class="muted">New recipe</span>
 	</nav>
@@ -51,7 +52,7 @@
 		{categories}
 		{areas}
 		onsave={save}
-		oncancel={() => goto('/my-recipes')}
+		oncancel={() => goto(resolve('/my-recipes'))}
 	/>
 </div>
 

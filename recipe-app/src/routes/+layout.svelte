@@ -2,6 +2,7 @@
 	import '../app.css';
 	import { onMount } from 'svelte';
 	import { page } from '$app/state';
+	import { base, resolve } from '$app/paths';
 	import { registerRecipeUi } from '$lib/stencil';
 	import { favorites } from '$lib/state/favorites.svelte';
 	import { myRecipes } from '$lib/state/my-recipes.svelte';
@@ -19,16 +20,20 @@
 		registerRecipeUi();
 	});
 
+	// `path` is the route as authored, used for matching; `href` is that path
+	// resolved against the base, which is what the browser actually navigates to.
 	const links = $derived([
-		{ href: '/', label: 'Discover', badge: 0 },
-		{ href: '/favorites', label: 'Favourites', badge: favorites.count },
-		{ href: '/my-recipes', label: 'My recipes', badge: myRecipes.count },
-		{ href: '/planner', label: 'Planner', badge: mealPlan.plannedCount },
-		{ href: '/about', label: 'About', badge: 0 }
+		{ path: '/', href: resolve('/'), label: 'Discover', badge: 0 },
+		{ path: '/favorites', href: resolve('/favorites'), label: 'Favourites', badge: favorites.count },
+		{ path: '/my-recipes', href: resolve('/my-recipes'), label: 'My recipes', badge: myRecipes.count },
+		{ path: '/planner', href: resolve('/planner'), label: 'Planner', badge: mealPlan.plannedCount },
+		{ path: '/about', href: resolve('/about'), label: 'About', badge: 0 }
 	]);
 
-	function isActive(href: string): boolean {
-		return href === '/' ? page.url.pathname === '/' : page.url.pathname.startsWith(href);
+	function isActive(path: string): boolean {
+		// page.url.pathname carries the base path; strip it before comparing.
+		const current = page.url.pathname.slice(base.length) || '/';
+		return path === '/' ? current === '/' : current.startsWith(path);
 	}
 </script>
 
@@ -40,7 +45,7 @@
 
 <header class="site-header">
 	<div class="header-inner">
-		<a class="brand" href="/" onclick={() => (menuOpen = false)}>
+		<a class="brand" href={resolve('/')} onclick={() => (menuOpen = false)}>
 			<span class="brand-mark" aria-hidden="true">🍲</span>
 			<span class="brand-text">
 				<strong>Recipe Finder</strong>
@@ -60,12 +65,12 @@
 		</button>
 
 		<nav id="primary-nav" class="nav" class:is-open={menuOpen} aria-label="Primary">
-			{#each links as link (link.href)}
+			{#each links as link (link.path)}
 				<a
 					class="nav-link"
-					class:is-active={isActive(link.href)}
+					class:is-active={isActive(link.path)}
 					href={link.href}
-					aria-current={isActive(link.href) ? 'page' : undefined}
+					aria-current={isActive(link.path) ? 'page' : undefined}
 					onclick={() => (menuOpen = false)}
 				>
 					{link.label}

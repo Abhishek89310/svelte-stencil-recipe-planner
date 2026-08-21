@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { myRecipes } from '$lib/state/my-recipes.svelte';
 	import { favorites } from '$lib/state/favorites.svelte';
 	import { mealPlan } from '$lib/state/meal-plan.svelte';
@@ -46,7 +47,7 @@
 			</p>
 		</div>
 
-		<a class="btn btn-primary" href="/my-recipes/new">New recipe</a>
+		<a class="btn btn-primary" href={resolve('/my-recipes/new')}>New recipe</a>
 	</div>
 
 	{#if myRecipes.count === 0}
@@ -55,7 +56,7 @@
 			title="No recipes of your own yet"
 			description="Add a family recipe, a weeknight favourite, or anything you want to keep and plan around."
 		>
-			<a class="btn btn-primary" href="/my-recipes/new">Write your first recipe</a>
+			<a class="btn btn-primary" href={resolve('/my-recipes/new')}>Write your first recipe</a>
 		</EmptyState>
 	{:else}
 		<div class="toolbar">
@@ -82,7 +83,7 @@
 				<ul class="rows">
 					{#each visible as recipe (recipe.id)}
 						<li class="row">
-							<a class="row-main" href="/recipes/{recipe.id}">
+							<a class="row-main" href={resolve('/recipes/[id]', { id: recipe.id })}>
 								<span class="row-name">{recipe.name}</span>
 								<span class="row-meta muted">
 									{recipe.category} · {recipe.ingredients.length}
@@ -94,7 +95,7 @@
 							</a>
 
 							<div class="row-actions">
-								<a class="btn btn-sm" href="/my-recipes/{recipe.id}/edit">Edit</a>
+								<a class="btn btn-sm" href={resolve('/my-recipes/[id]/edit', { id: recipe.id })}>Edit</a>
 								<button
 									class="btn btn-sm btn-danger"
 									type="button"

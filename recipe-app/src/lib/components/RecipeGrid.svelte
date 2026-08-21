@@ -2,6 +2,7 @@
 	import type { Recipe, RecipeSummary } from '$lib/types';
 	import type { FavoriteToggleDetail, RecipeSelectDetail } from '@iosdev_89/recipe-ui';
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import { favorites } from '$lib/state/favorites.svelte';
 	import { toasts } from '$lib/state/toasts.svelte';
 
@@ -33,7 +34,7 @@
 		if (onselect) {
 			onselect(recipe);
 		} else {
-			goto(`/recipes/${recipe.id}`);
+			goto(resolve('/recipes/[id]', { id: recipe.id }));
 		}
 	}
 

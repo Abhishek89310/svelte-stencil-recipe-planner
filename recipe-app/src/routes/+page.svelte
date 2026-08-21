@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { onMount } from 'svelte';
 	import type { SearchDetail } from '@iosdev_89/recipe-ui';
 	import type { Recipe, RecipeSummary } from '$lib/types';
@@ -320,7 +321,7 @@
 		<div class="page-header">
 			<h2>{source === 'mine' ? 'Your recipes' : resultLabel}</h2>
 			{#if !loading && !error}
-				<a class="btn btn-sm" href="/my-recipes/new">Add your own recipe</a>
+				<a class="btn btn-sm" href={resolve('/my-recipes/new')}>Add your own recipe</a>
 			{/if}
 		</div>
 
@@ -341,7 +342,7 @@
 					: 'Nothing to show just yet.'}
 			>
 				<button class="btn" type="button" onclick={resetAll}>Clear filters</button>
-				<a class="btn btn-primary" href="/my-recipes/new">Write your own</a>
+				<a class="btn btn-primary" href={resolve('/my-recipes/new')}>Write your own</a>
 			</EmptyState>
 		{:else}
 			<RecipeGrid recipes={visible} />

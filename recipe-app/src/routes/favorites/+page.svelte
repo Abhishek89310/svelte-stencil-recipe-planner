@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import type { RecipeSummary } from '$lib/types';
 	import { favorites } from '$lib/state/favorites.svelte';
 	import { toasts } from '$lib/state/toasts.svelte';
@@ -101,7 +102,7 @@
 			title="No favourites yet"
 			description="Tap the heart on any recipe card to keep it here for later."
 		>
-			<a class="btn btn-primary" href="/">Browse recipes</a>
+			<a class="btn btn-primary" href={resolve('/')}>Browse recipes</a>
 		</EmptyState>
 	{:else if visible.length === 0}
 		<EmptyState icon="🔍" title="Nothing in that category" description="Try a different filter.">
