@@ -1,0 +1,8 @@
+src/
+www/
+docs/
+demo/
+stencil.config.ts
+tsconfig.json
+*.spec.ts
+*.e2e.ts

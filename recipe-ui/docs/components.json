@@ -1,0 +1,1669 @@
+{
+  "timestamp": "2026-08-21T08:42:00",
+  "compiler": {
+    "name": "@stencil/core",
+    "version": "4.44.0",
+    "typescriptVersion": "5.8.3"
+  },
+  "components": [
+    {
+      "filePath": "src/components/ingredient-list/ingredient-list.tsx",
+      "encapsulation": "shadow",
+      "tag": "ingredient-list",
+      "readme": "# ingredient-list\n\n\n",
+      "docs": "Renders an ingredient checklist.\n\n`items` accepts either a real array (set as a DOM property, which is how\nSvelteKit binds it) or a JSON string (useful from plain HTML). Parsing both\nshapes keeps the component honest in either environment.",
+      "docsTags": [
+        {
+          "name": "slot",
+          "text": "header - Replaces the default heading row."
+        },
+        {
+          "name": "slot",
+          "text": "- Rendered under the list, e.g. a \"add all to shopping list\" button."
+        }
+      ],
+      "usage": {},
+      "props": [
+        {
+          "name": "checkable",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "checkable",
+          "reflectToAttr": false,
+          "docs": "When true each row gets a checkbox and emits `ingredientCheck`.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "columns",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "columns",
+          "reflectToAttr": false,
+          "docs": "Renders the list in two columns on wide viewports.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "heading",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "heading",
+          "reflectToAttr": false,
+          "docs": "Heading text shown above the list.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'Ingredients'"
+            }
+          ],
+          "default": "'Ingredients'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "items",
+          "type": "Ingredient[] | string",
+          "complexType": {
+            "original": "Ingredient[] | string",
+            "resolved": "Ingredient[] | string",
+            "references": {
+              "Ingredient": {
+                "location": "local",
+                "path": "/Users/abhishek/Desktop/Projects/NAGP/SvelteJSAssignment/recipe-ui/src/components/ingredient-list/ingredient-list.tsx",
+                "id": "src/components/ingredient-list/ingredient-list.tsx::Ingredient"
+              }
+            }
+          },
+          "mutable": false,
+          "attr": "items",
+          "reflectToAttr": false,
+          "docs": "Ingredients as an array of `{ name, measure }`, or a JSON string of the same.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "[]"
+            }
+          ],
+          "default": "[]",
+          "values": [
+            {
+              "type": "Ingredient[]"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "ingredientCheck",
+          "detail": "IngredientCheckDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "IngredientCheckDetail",
+            "resolved": "IngredientCheckDetail",
+            "references": {
+              "IngredientCheckDetail": {
+                "location": "local",
+                "path": "/Users/abhishek/Desktop/Projects/NAGP/SvelteJSAssignment/recipe-ui/src/components/ingredient-list/ingredient-list.tsx",
+                "id": "src/components/ingredient-list/ingredient-list.tsx::IngredientCheckDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired when a checkable row is toggled.",
+          "docsTags": []
+        }
+      ],
+      "listeners": [],
+      "styles": [],
+      "slots": [
+        {
+          "name": "",
+          "docs": "Rendered under the list, e.g. a \"add all to shopping list\" button."
+        },
+        {
+          "name": "header",
+          "docs": "Replaces the default heading row."
+        }
+      ],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
+    {
+      "filePath": "src/components/meal-slot/meal-slot.tsx",
+      "encapsulation": "shadow",
+      "tag": "meal-slot",
+      "readme": "# meal-slot\n\n\n",
+      "docs": "One cell of the weekly meal planner grid.\n\nThe slot is both a drop target (for drag-and-drop planning) and a plain\nbutton (for click-to-assign), so the planner stays usable with a keyboard\nand on touch devices where dragging is awkward.",
+      "docsTags": [
+        {
+          "name": "slot",
+          "text": "empty - Replaces the default empty-state content."
+        },
+        {
+          "name": "slot",
+          "text": "- Extra content rendered under a filled slot."
+        }
+      ],
+      "usage": {},
+      "props": [
+        {
+          "name": "day",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "day",
+          "reflectToAttr": false,
+          "docs": "Day key, e.g. \"Monday\". Echoed back in every event.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": true,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "dropMimeType",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "drop-mime-type",
+          "reflectToAttr": false,
+          "docs": "MIME type read from the drag payload. Must match what the drag source sets.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'text/recipe-id'"
+            }
+          ],
+          "default": "'text/recipe-id'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "highlighted",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "highlighted",
+          "reflectToAttr": false,
+          "docs": "Highlights the slot, e.g. for the current day.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "meal",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "meal",
+          "reflectToAttr": false,
+          "docs": "Meal key, e.g. \"Breakfast\". Echoed back in every event.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": true,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "recipeId",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "recipe-id",
+          "reflectToAttr": false,
+          "docs": "Id of the assigned recipe. Leave unset to render the empty state.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "recipeImage",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "recipe-image",
+          "reflectToAttr": false,
+          "docs": "Thumbnail of the assigned recipe.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "recipeMeta",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "recipe-meta",
+          "reflectToAttr": false,
+          "docs": "Secondary line under the title, e.g. the category.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "recipeName",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "recipe-name",
+          "reflectToAttr": false,
+          "docs": "Title of the assigned recipe.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "mealAssign",
+          "detail": "MealSlotDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "MealSlotDetail",
+            "resolved": "MealSlotDetail",
+            "references": {
+              "MealSlotDetail": {
+                "location": "local",
+                "path": "/Users/abhishek/Desktop/Projects/NAGP/SvelteJSAssignment/recipe-ui/src/components/meal-slot/meal-slot.tsx",
+                "id": "src/components/meal-slot/meal-slot.tsx::MealSlotDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired when an empty slot is activated, asking the host to open a picker.",
+          "docsTags": []
+        },
+        {
+          "event": "mealDrop",
+          "detail": "MealDropDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "MealDropDetail",
+            "resolved": "MealDropDetail",
+            "references": {
+              "MealDropDetail": {
+                "location": "local",
+                "path": "/Users/abhishek/Desktop/Projects/NAGP/SvelteJSAssignment/recipe-ui/src/components/meal-slot/meal-slot.tsx",
+                "id": "src/components/meal-slot/meal-slot.tsx::MealDropDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired when a recipe is dropped onto the slot.",
+          "docsTags": []
+        },
+        {
+          "event": "mealOpen",
+          "detail": "MealSlotDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "MealSlotDetail",
+            "resolved": "MealSlotDetail",
+            "references": {
+              "MealSlotDetail": {
+                "location": "local",
+                "path": "/Users/abhishek/Desktop/Projects/NAGP/SvelteJSAssignment/recipe-ui/src/components/meal-slot/meal-slot.tsx",
+                "id": "src/components/meal-slot/meal-slot.tsx::MealSlotDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired when a filled slot's body is activated, to open the recipe.",
+          "docsTags": []
+        },
+        {
+          "event": "mealRemove",
+          "detail": "MealSlotDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "MealSlotDetail",
+            "resolved": "MealSlotDetail",
+            "references": {
+              "MealSlotDetail": {
+                "location": "local",
+                "path": "/Users/abhishek/Desktop/Projects/NAGP/SvelteJSAssignment/recipe-ui/src/components/meal-slot/meal-slot.tsx",
+                "id": "src/components/meal-slot/meal-slot.tsx::MealSlotDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired when the remove button on a filled slot is activated.",
+          "docsTags": []
+        }
+      ],
+      "listeners": [],
+      "styles": [],
+      "slots": [
+        {
+          "name": "",
+          "docs": "Extra content rendered under a filled slot."
+        },
+        {
+          "name": "empty",
+          "docs": "Replaces the default empty-state content."
+        }
+      ],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
+    {
+      "filePath": "src/components/modal-dialog/modal-dialog.tsx",
+      "encapsulation": "shadow",
+      "tag": "modal-dialog",
+      "readme": "# modal-dialog\n\n\n",
+      "docs": "An accessible modal built on the native `<dialog>` element.\n\nDelegating to `<dialog>` buys focus trapping, the top layer, inert background\ncontent and Escape handling from the platform rather than re-implementing\nthem. `open` stays the source of truth: closing always routes through\n`dialogClose` so the consumer's state and the DOM cannot drift apart.",
+      "docsTags": [
+        {
+          "name": "slot",
+          "text": "header - Replaces the default heading."
+        },
+        {
+          "name": "slot",
+          "text": "- Dialog body content."
+        },
+        {
+          "name": "slot",
+          "text": "footer - Action row pinned to the bottom of the dialog."
+        }
+      ],
+      "usage": {},
+      "props": [
+        {
+          "name": "heading",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "heading",
+          "reflectToAttr": false,
+          "docs": "Text of the default heading.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "''"
+            }
+          ],
+          "default": "''",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "hideClose",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "hide-close",
+          "reflectToAttr": false,
+          "docs": "Hides the built-in close button, e.g. for a forced choice.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "open",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "open",
+          "reflectToAttr": false,
+          "docs": "Controls visibility. The component never flips this itself.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "persistent",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "persistent",
+          "reflectToAttr": false,
+          "docs": "When true, clicking the backdrop does not request a close.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "subheading",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "subheading",
+          "reflectToAttr": false,
+          "docs": "Supporting line under the heading.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "''"
+            }
+          ],
+          "default": "''",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "width",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "width",
+          "reflectToAttr": false,
+          "docs": "Max width of the dialog panel, as any CSS length.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'560px'"
+            }
+          ],
+          "default": "'560px'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [
+        {
+          "name": "requestClose",
+          "returns": {
+            "type": "Promise<void>",
+            "docs": ""
+          },
+          "complexType": {
+            "signature": "() => Promise<void>",
+            "parameters": [],
+            "references": {
+              "Promise": {
+                "location": "global",
+                "id": "global::Promise"
+              }
+            },
+            "return": "Promise<void>"
+          },
+          "signature": "requestClose() => Promise<void>",
+          "parameters": [],
+          "docs": "Imperatively request a close, emitting `dialogClose`.",
+          "docsTags": []
+        }
+      ],
+      "events": [
+        {
+          "event": "dialogClose",
+          "detail": "void",
+          "bubbles": true,
+          "complexType": {
+            "original": "void",
+            "resolved": "void",
+            "references": {}
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired whenever a close is requested: button, Escape, or backdrop click.",
+          "docsTags": []
+        },
+        {
+          "event": "dialogOpen",
+          "detail": "void",
+          "bubbles": true,
+          "complexType": {
+            "original": "void",
+            "resolved": "void",
+            "references": {}
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired once the dialog has finished opening.",
+          "docsTags": []
+        }
+      ],
+      "listeners": [],
+      "styles": [],
+      "slots": [
+        {
+          "name": "",
+          "docs": "Dialog body content."
+        },
+        {
+          "name": "footer",
+          "docs": "Action row pinned to the bottom of the dialog."
+        },
+        {
+          "name": "header",
+          "docs": "Replaces the default heading."
+        }
+      ],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    },
+    {
+      "filePath": "src/components/rating-stars/rating-stars.tsx",
+      "encapsulation": "shadow",
+      "tag": "rating-stars",
+      "readme": "# rating-stars\n\n\n",
+      "docs": "A star rating that works as either a read-only indicator or an input.\n\nWhen `readonly` is false the control is keyboard operable: arrow keys move\nbetween values and Home/End jump to the ends, matching the ARIA slider\npattern that assistive technology already knows.",
+      "docsTags": [],
+      "usage": {},
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "label",
+          "reflectToAttr": false,
+          "docs": "Accessible label for the control.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'Rating'"
+            }
+          ],
+          "default": "'Rating'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "max",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "max",
+          "reflectToAttr": false,
+          "docs": "Number of stars to render.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "5"
+            }
+          ],
+          "default": "5",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "readonly",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "readonly",
+          "reflectToAttr": false,
+          "docs": "When true the stars are a display-only indicator.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "showValue",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "show-value",
+          "reflectToAttr": false,
+          "docs": "Renders the numeric value next to the stars.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "size",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "size",
+          "reflectToAttr": false,
+          "docs": "Star edge size in pixels.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "16"
+            }
+          ],
+          "default": "16",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "value",
+          "reflectToAttr": false,
+          "docs": "Current rating. Fractional values render partially filled stars.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "0"
+            }
+          ],
+          "default": "0",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "ratingChange",
+          "detail": "RatingChangeDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "RatingChangeDetail",
+            "resolved": "RatingChangeDetail",
+            "references": {
+              "RatingChangeDetail": {
+                "location": "local",
+                "path": "/Users/abhishek/Desktop/Projects/NAGP/SvelteJSAssignment/recipe-ui/src/components/rating-stars/rating-stars.tsx",
+                "id": "src/components/rating-stars/rating-stars.tsx::RatingChangeDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired when an interactive rating is changed by click or keyboard.",
+          "docsTags": []
+        }
+      ],
+      "listeners": [],
+      "styles": [],
+      "slots": [],
+      "parts": [],
+      "states": [],
+      "dependents": [
+        "recipe-card"
+      ],
+      "dependencies": [],
+      "dependencyGraph": {
+        "recipe-card": [
+          "rating-stars"
+        ]
+      }
+    },
+    {
+      "filePath": "src/components/recipe-card/recipe-card.tsx",
+      "encapsulation": "shadow",
+      "tag": "recipe-card",
+      "readme": "# recipe-card\n\n\n",
+      "docs": "A presentational card summarising a single recipe.\n\nThe component owns no state: `favorite` is controlled by the consumer, which\nreacts to `favoriteToggle` and passes the new value back down. That keeps the\ncard usable from any framework without fighting over who owns the truth.",
+      "docsTags": [
+        {
+          "name": "slot",
+          "text": "badge   - Content pinned to the top-left of the media area."
+        },
+        {
+          "name": "slot",
+          "text": "- Free-form content rendered between the meta row and the actions."
+        },
+        {
+          "name": "slot",
+          "text": "actions - Extra controls rendered in the card footer, next to the built-in button."
+        }
+      ],
+      "usage": {},
+      "props": [
+        {
+          "name": "area",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "area",
+          "reflectToAttr": false,
+          "docs": "Cuisine or region label, e.g. \"Italian\".",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "authored",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "authored",
+          "reflectToAttr": false,
+          "docs": "Marks the recipe as user-created, which surfaces an \"Own recipe\" chip.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "category",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "category",
+          "reflectToAttr": false,
+          "docs": "Category label, e.g. \"Dessert\". Rendered as the primary meta chip.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "compact",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "compact",
+          "reflectToAttr": false,
+          "docs": "Renders a slimmer layout for dense grids and planner columns.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "favorite",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "favorite",
+          "reflectToAttr": false,
+          "docs": "Whether the recipe is currently in the user's favorites.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "image",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "image",
+          "reflectToAttr": false,
+          "docs": "Absolute or relative URL of the recipe image.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "name",
+          "reflectToAttr": false,
+          "docs": "Recipe title shown as the card heading.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": true,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "rating",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "rating",
+          "reflectToAttr": false,
+          "docs": "Optional 0-5 rating. Omit or set to 0 to hide the stars.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "0"
+            }
+          ],
+          "default": "0",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "recipeId",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "recipe-id",
+          "reflectToAttr": false,
+          "docs": "Stable identifier passed back in every emitted event.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": true,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "tags",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "tags",
+          "reflectToAttr": false,
+          "docs": "Comma-separated tag list, e.g. \"Pasta,Quick\". Blank entries are ignored.",
+          "docsTags": [],
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": true,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "favoriteToggle",
+          "detail": "FavoriteToggleDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "FavoriteToggleDetail",
+            "resolved": "FavoriteToggleDetail",
+            "references": {
+              "FavoriteToggleDetail": {
+                "location": "local",
+                "path": "/Users/abhishek/Desktop/Projects/NAGP/SvelteJSAssignment/recipe-ui/src/components/recipe-card/recipe-card.tsx",
+                "id": "src/components/recipe-card/recipe-card.tsx::FavoriteToggleDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired when the favorite button is activated.",
+          "docsTags": []
+        },
+        {
+          "event": "recipeSelect",
+          "detail": "RecipeSelectDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "RecipeSelectDetail",
+            "resolved": "RecipeSelectDetail",
+            "references": {
+              "RecipeSelectDetail": {
+                "location": "local",
+                "path": "/Users/abhishek/Desktop/Projects/NAGP/SvelteJSAssignment/recipe-ui/src/components/recipe-card/recipe-card.tsx",
+                "id": "src/components/recipe-card/recipe-card.tsx::RecipeSelectDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired when the card body or its primary button is activated.",
+          "docsTags": []
+        }
+      ],
+      "listeners": [],
+      "styles": [],
+      "slots": [
+        {
+          "name": "",
+          "docs": "Free-form content rendered between the meta row and the actions."
+        },
+        {
+          "name": "actions",
+          "docs": "Extra controls rendered in the card footer, next to the built-in button."
+        },
+        {
+          "name": "badge",
+          "docs": "Content pinned to the top-left of the media area."
+        }
+      ],
+      "parts": [],
+      "states": [],
+      "dependents": [],
+      "dependencies": [
+        "rating-stars"
+      ],
+      "dependencyGraph": {
+        "recipe-card": [
+          "rating-stars"
+        ]
+      }
+    },
+    {
+      "filePath": "src/components/recipe-search-bar/recipe-search-bar.tsx",
+      "encapsulation": "shadow",
+      "tag": "recipe-search-bar",
+      "readme": "# recipe-search-bar\n\n\n",
+      "docs": "A debounced search field with an optional filter tray.\n\nTwo events are emitted deliberately: `searchInput` fires on every debounced\nkeystroke so a consumer can drive live results, while `searchSubmit` fires\nonly on Enter or the button. Consumers pick whichever suits their API budget.",
+      "docsTags": [
+        {
+          "name": "slot",
+          "text": "filters - Rendered under the input, intended for select/chip filters."
+        },
+        {
+          "name": "slot",
+          "text": "- Rendered after the filter tray, e.g. a result count line."
+        }
+      ],
+      "usage": {},
+      "props": [
+        {
+          "name": "debounce",
+          "type": "number",
+          "complexType": {
+            "original": "number",
+            "resolved": "number",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "debounce",
+          "reflectToAttr": false,
+          "docs": "Milliseconds to wait after the last keystroke before emitting `searchInput`.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "350"
+            }
+          ],
+          "default": "350",
+          "values": [
+            {
+              "type": "number"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "disabled",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "disabled",
+          "reflectToAttr": false,
+          "docs": "Disables the whole control.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "loading",
+          "type": "boolean",
+          "complexType": {
+            "original": "boolean",
+            "resolved": "boolean",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "loading",
+          "reflectToAttr": false,
+          "docs": "Shows a spinner in place of the search icon.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "false"
+            }
+          ],
+          "default": "false",
+          "values": [
+            {
+              "type": "boolean"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "placeholder",
+          "reflectToAttr": false,
+          "docs": "Placeholder text for the input.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'Search recipes...'"
+            }
+          ],
+          "default": "'Search recipes...'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "submitLabel",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "submit-label",
+          "reflectToAttr": false,
+          "docs": "Text of the submit button. Set to an empty string to hide the button.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "'Search'"
+            }
+          ],
+          "default": "'Search'",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "complexType": {
+            "original": "string",
+            "resolved": "string",
+            "references": {}
+          },
+          "mutable": false,
+          "attr": "value",
+          "reflectToAttr": false,
+          "docs": "Controlled value. Updating it from the consumer resets the internal draft.",
+          "docsTags": [
+            {
+              "name": "default",
+              "text": "''"
+            }
+          ],
+          "default": "''",
+          "values": [
+            {
+              "type": "string"
+            }
+          ],
+          "optional": false,
+          "required": false,
+          "getter": false,
+          "setter": false
+        }
+      ],
+      "methods": [],
+      "events": [
+        {
+          "event": "searchClear",
+          "detail": "void",
+          "bubbles": true,
+          "complexType": {
+            "original": "void",
+            "resolved": "void",
+            "references": {}
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired when the clear button empties the field.",
+          "docsTags": []
+        },
+        {
+          "event": "searchInput",
+          "detail": "SearchDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "SearchDetail",
+            "resolved": "SearchDetail",
+            "references": {
+              "SearchDetail": {
+                "location": "local",
+                "path": "/Users/abhishek/Desktop/Projects/NAGP/SvelteJSAssignment/recipe-ui/src/components/recipe-search-bar/recipe-search-bar.tsx",
+                "id": "src/components/recipe-search-bar/recipe-search-bar.tsx::SearchDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired after the debounce window closes on each edit.",
+          "docsTags": []
+        },
+        {
+          "event": "searchSubmit",
+          "detail": "SearchDetail",
+          "bubbles": true,
+          "complexType": {
+            "original": "SearchDetail",
+            "resolved": "SearchDetail",
+            "references": {
+              "SearchDetail": {
+                "location": "local",
+                "path": "/Users/abhishek/Desktop/Projects/NAGP/SvelteJSAssignment/recipe-ui/src/components/recipe-search-bar/recipe-search-bar.tsx",
+                "id": "src/components/recipe-search-bar/recipe-search-bar.tsx::SearchDetail"
+              }
+            }
+          },
+          "cancelable": true,
+          "composed": true,
+          "docs": "Fired when the user presses Enter or activates the submit button.",
+          "docsTags": []
+        }
+      ],
+      "listeners": [],
+      "styles": [],
+      "slots": [
+        {
+          "name": "",
+          "docs": "Rendered after the filter tray, e.g. a result count line."
+        },
+        {
+          "name": "filters",
+          "docs": "Rendered under the input, intended for select/chip filters."
+        }
+      ],
+      "parts": [
+        {
+          "name": "input",
+          "docs": ""
+        }
+      ],
+      "states": [],
+      "dependents": [],
+      "dependencies": [],
+      "dependencyGraph": {}
+    }
+  ],
+  "typeLibrary": {
+    "src/components/ingredient-list/ingredient-list.tsx::Ingredient": {
+      "declaration": "export interface Ingredient {\n  name: string;\n  measure?: string;\n}",
+      "docstring": "",
+      "path": "src/components/ingredient-list/ingredient-list.tsx"
+    },
+    "src/components/ingredient-list/ingredient-list.tsx::IngredientCheckDetail": {
+      "declaration": "export interface IngredientCheckDetail {\n  index: number;\n  name: string;\n  checked: boolean;\n}",
+      "docstring": "",
+      "path": "src/components/ingredient-list/ingredient-list.tsx"
+    },
+    "src/components/meal-slot/meal-slot.tsx::MealSlotDetail": {
+      "declaration": "export interface MealSlotDetail {\n  day: string;\n  meal: string;\n  recipeId?: string;\n}",
+      "docstring": "",
+      "path": "src/components/meal-slot/meal-slot.tsx"
+    },
+    "src/components/meal-slot/meal-slot.tsx::MealDropDetail": {
+      "declaration": "export interface MealDropDetail extends MealSlotDetail {\n  /** The recipe id read from the drag payload. */\n  droppedRecipeId: string;\n}",
+      "docstring": "",
+      "path": "src/components/meal-slot/meal-slot.tsx"
+    },
+    "src/components/rating-stars/rating-stars.tsx::RatingChangeDetail": {
+      "declaration": "export interface RatingChangeDetail {\n  value: number;\n}",
+      "docstring": "",
+      "path": "src/components/rating-stars/rating-stars.tsx"
+    },
+    "src/components/recipe-card/recipe-card.tsx::RecipeSelectDetail": {
+      "declaration": "export interface RecipeSelectDetail {\n  recipeId: string;\n  name: string;\n}",
+      "docstring": "",
+      "path": "src/components/recipe-card/recipe-card.tsx"
+    },
+    "src/components/recipe-card/recipe-card.tsx::FavoriteToggleDetail": {
+      "declaration": "export interface FavoriteToggleDetail {\n  recipeId: string;\n  name: string;\n  /** The state the card is requesting - true means \"please favorite me\". */\n  favorite: boolean;\n}",
+      "docstring": "",
+      "path": "src/components/recipe-card/recipe-card.tsx"
+    },
+    "src/components/recipe-search-bar/recipe-search-bar.tsx::SearchDetail": {
+      "declaration": "export interface SearchDetail {\n  /** The trimmed query string. */\n  query: string;\n}",
+      "docstring": "",
+      "path": "src/components/recipe-search-bar/recipe-search-bar.tsx"
+    }
+  }
+}

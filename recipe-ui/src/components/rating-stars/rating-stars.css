@@ -1,0 +1,51 @@
+:host {
+  --_on: var(--ru-color-star, #f59e0b);
+  --_off: transparent;
+  --_stroke: var(--ru-color-star, #f59e0b);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ru-space-2, 8px);
+  font-family: var(--ru-font-family, ui-sans-serif, system-ui, sans-serif);
+  color: var(--ru-color-text-muted, #78716c);
+  line-height: 1;
+}
+
+:host(.is-interactive) {
+  cursor: pointer;
+  border-radius: var(--ru-radius-sm, 6px);
+}
+
+:host(.is-interactive:focus-visible) {
+  outline: 2px solid var(--ru-color-accent, #c2410c);
+  outline-offset: 3px;
+}
+
+.stars {
+  display: inline-flex;
+  gap: 2px;
+}
+
+.star {
+  display: inline-grid;
+  place-items: center;
+  transition: transform var(--ru-transition, 160ms ease);
+}
+
+:host(.is-interactive) .star:hover {
+  transform: scale(1.18);
+}
+
+.value {
+  font-size: var(--ru-font-size-sm, 0.8125rem);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star,
+  :host(.is-interactive) .star:hover {
+    transition: none;
+    transform: none;
+  }
+}

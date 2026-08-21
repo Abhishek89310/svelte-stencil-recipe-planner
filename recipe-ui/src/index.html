@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>recipe-ui component gallery</title>
+    <script type="module" src="/build/recipe-ui.esm.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 32px;
+        font-family: var(--ru-font-family, ui-sans-serif, system-ui, sans-serif);
+        background: var(--ru-color-surface-muted, #f7f5f2);
+        color: var(--ru-color-text, #1c1917);
+      }
+      h1 { letter-spacing: -0.02em; }
+      section { margin-bottom: 48px; max-width: 1040px; }
+      h2 { font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.08em; color: #78716c; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+      .planner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .card-host { background: #fff; padding: 20px; border-radius: 12px; }
+    </style>
+  </head>
+  <body>
+    <h1>recipe-ui</h1>
+    <p>Local development gallery. Interact with a component and watch the console for its events.</p>
+
+    <section>
+      <h2>recipe-search-bar</h2>
+      <recipe-search-bar id="bar" placeholder="Search for a recipe...">
+        <select slot="filters"><option>All categories</option><option>Dessert</option></select>
+        <span>Slotted filters render here.</span>
+      </recipe-search-bar>
+    </section>
+
+    <section>
+      <h2>recipe-card</h2>
+      <div class="grid">
+        <recipe-card
+          recipe-id="52771"
+          name="Spicy Arrabiata Penne"
+          image="https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"
+          category="Vegetarian"
+          area="Italian"
+          tags="Pasta,Curry"
+          rating="4.5"
+        >
+          <span slot="badge" style="background:#1c1917;color:#fff;padding:2px 8px;border-radius:999px;font-size:12px">30 min</span>
+          <button slot="actions">Plan</button>
+        </recipe-card>
+        <recipe-card recipe-id="local-1" name="Grandma's Banana Bread" category="Dessert" authored favorite></recipe-card>
+      </div>
+    </section>
+
+    <section>
+      <h2>rating-stars</h2>
+      <div class="card-host">
+        <rating-stars value="3" show-value size="26"></rating-stars>
+      </div>
+    </section>
+
+    <section>
+      <h2>ingredient-list</h2>
+      <div class="card-host">
+        <ingredient-list id="ing" checkable columns></ingredient-list>
+      </div>
+    </section>
+
+    <section>
+      <h2>meal-slot</h2>
+      <div class="planner">
+        <meal-slot day="Monday" meal="Breakfast"></meal-slot>
+        <meal-slot day="Monday" meal="Lunch" recipe-id="52771" recipe-name="Spicy Arrabiata Penne" recipe-meta="Italian"
+          recipe-image="https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg"></meal-slot>
+        <meal-slot day="Monday" meal="Dinner" highlighted></meal-slot>
+      </div>
+    </section>
+
+    <section>
+      <h2>modal-dialog</h2>
+      <button id="openDialog">Open dialog</button>
+      <modal-dialog id="dlg" heading="Delete recipe?" subheading="This cannot be undone.">
+        <p>The recipe will be removed from your collection and from any meal plan it appears in.</p>
+        <div slot="footer">
+          <button id="cancelDialog">Cancel</button>
+          <button id="confirmDialog">Delete</button>
+        </div>
+      </modal-dialog>
+    </section>
+
+    <script type="module">
+      const log = (e) => console.log(e.type, e.detail);
+      for (const type of ['searchInput','searchSubmit','searchClear','recipeSelect','favoriteToggle','ratingChange','ingredientCheck','mealAssign','mealRemove','mealOpen','mealDrop','dialogClose']) {
+        document.addEventListener(type, log);
+      }
+
+      customElements.whenDefined('ingredient-list').then(() => {
+        document.getElementById('ing').items = [
+          { name: 'Penne rigate', measure: '1 pound' },
+          { name: 'Olive oil', measure: '1/4 cup' },
+          { name: 'Garlic', measure: '3 cloves' },
+          { name: 'Chopped tomatoes', measure: '1 tin' },
+          { name: 'Red chile flakes', measure: '1/2 teaspoon' },
+          { name: 'Basil', measure: '6 leaves' },
+        ];
+      });
+
+      const dlg = document.getElementById('dlg');
+      document.getElementById('openDialog').onclick = () => (dlg.open = true);
+      dlg.addEventListener('dialogClose', () => (dlg.open = false));
+      document.getElementById('cancelDialog').onclick = () => (dlg.open = false);
+      document.getElementById('confirmDialog').onclick = () => (dlg.open = false);
+    </script>
+  </body>
+</html>
